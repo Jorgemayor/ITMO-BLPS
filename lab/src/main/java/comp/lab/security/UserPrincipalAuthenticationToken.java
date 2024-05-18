@@ -3,9 +3,9 @@ package comp.lab.security;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 
 public class UserPrincipalAuthenticationToken extends AbstractAuthenticationToken {
-    private final UserPrinciple principal;
+    private final UserPrincipal principal;
 
-    public UserPrincipalAuthenticationToken(UserPrinciple principal) {
+    public UserPrincipalAuthenticationToken(UserPrincipal principal) {
         super(principal.getAuthorities());
         this.principal = principal;
         setAuthenticated(true);
@@ -17,7 +17,7 @@ public class UserPrincipalAuthenticationToken extends AbstractAuthenticationToke
     }
 
     @Override
-    public UserPrinciple getPrincipal() {
+    public UserPrincipal getPrincipal() {
         return principal;
     }
 }

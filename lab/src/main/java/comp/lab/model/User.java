@@ -1,5 +1,6 @@
 package comp.lab.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import jakarta.validation.constraints.NotNull;
@@ -39,6 +40,7 @@ public class User {
     @Pattern(regexp = "^[\\w-.]+@([\\w-]+\\.)+[\\w-]{2,4}$")
     private String email;
 
+    @JsonIgnore
     private String password;
 
     @Transient

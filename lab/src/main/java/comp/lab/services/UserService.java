@@ -28,6 +28,10 @@ public class UserService {
         return userRepository.findAll();
     }
 
+    public Optional<User> findUserByEmail(String email) {
+        return userRepository.findUserByEmail(email);
+    }
+
     public void addUser(User user) {
         Optional<User> userOptional = userRepository.findUserByEmail(user.getEmail());
         if (userOptional.isPresent()) {
@@ -72,6 +76,13 @@ public class UserService {
                 user.setDob(localDate);
             }
         }
+    }
+
+    public void updateUserRole(Long userId, Role role) {
+        User user = userRepository.findById(userId).orElseThrow(
+                () -> new UserNotFoundException("user with id " + userId + " does not exists.")
+        );
+        user.setRole(role);
     }
 
     public void deleteUser(Long userId) {

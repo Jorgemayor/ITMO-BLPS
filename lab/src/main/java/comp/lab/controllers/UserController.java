@@ -1,5 +1,6 @@
 package comp.lab.controllers;
 
+import comp.lab.model.Role;
 import comp.lab.model.User;
 import comp.lab.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +41,14 @@ public class UserController {
             @RequestParam(required = false) String dob) {
         userService.updateUser(userId, name, email, password, dob);
         return new ResponseEntity<>("User updated successfully!", HttpStatus.CREATED);
+    }
+
+    @PutMapping(path = "/role/{userId}")
+    public ResponseEntity<String> updateUserRole(
+            @PathVariable("userId") Long userId,
+            @RequestParam Role role) {
+        userService.updateUserRole(userId, role);
+        return new ResponseEntity<>("User role updated!", HttpStatus.CREATED);
     }
 
     @DeleteMapping(path = "{userId}")
