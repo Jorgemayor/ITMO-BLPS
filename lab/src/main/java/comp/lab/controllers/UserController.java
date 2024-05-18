@@ -1,6 +1,6 @@
 package comp.lab.controllers;
 
-import comp.lab.modules.User;
+import comp.lab.model.User;
 import comp.lab.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

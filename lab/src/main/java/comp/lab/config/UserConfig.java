@@ -1,7 +1,7 @@
 package comp.lab.config;
 
-import comp.lab.modules.Role;
-import comp.lab.modules.User;
+import comp.lab.model.Role;
+import comp.lab.model.User;
 import comp.lab.repositories.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;

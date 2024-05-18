@@ -1,4 +1,4 @@
-package comp.lab.modules;
+package comp.lab.model;
 
 public enum Role {
     ADMIN,

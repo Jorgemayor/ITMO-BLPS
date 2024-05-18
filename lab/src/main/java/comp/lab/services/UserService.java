@@ -2,7 +2,8 @@ package comp.lab.services;
 
 import comp.lab.exceptions.EmailAlreadyExistsException;
 import comp.lab.exceptions.UserNotFoundException;
-import comp.lab.modules.User;
+import comp.lab.model.Role;
+import comp.lab.model.User;
 import comp.lab.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,6 +38,7 @@ public class UserService {
         if (!dob.isBefore(LocalDate.now())) {
             throw new IllegalStateException("Birthdate not acceptable.");
         }
+        user.setRole(Role.USER);
         userRepository.save(user);
     }
 
