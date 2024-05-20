@@ -1,8 +1,7 @@
 package comp.lab.config;
 
-import comp.lab.model.Role;
-import comp.lab.model.User;
-import comp.lab.repositories.UserRepository;
+import comp.lab.model.*;
+import comp.lab.repositories.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,7 +14,13 @@ import java.util.List;
 public class UserConfig {
 
     @Bean
-    CommandLineRunner commandLineRunner(UserRepository userRepository) {
+    CommandLineRunner commandLineRunner(
+            UserRepository userRepository,
+            CityRepository cityRepository,
+            RegionRepository regionRepository,
+            SectionRepository sectionRepository,
+            AdvertisementRepository advertisementRepository
+    ) {
         return args -> {
             User admin = new User(
                     "admin",
@@ -41,6 +46,68 @@ public class UserConfig {
 
             userRepository.saveAll(
                     List.of(admin, user1, user2)
+            );
+
+            Region region3 = new Region(
+                    "region3"
+            );
+
+            Region region4 = new Region(
+                    "region4"
+            );
+
+            regionRepository.saveAll(
+                    List.of(region3, region4)
+            );
+
+            City city1 = new City(
+                    "city1",
+                    region3
+            );
+
+            City city2 = new City(
+                    "city2",
+                    region4
+            );
+
+            cityRepository.saveAll(
+                    List.of(city1, city2)
+            );
+
+            Section aDefault = new Section(
+                    "default"
+            );
+
+            Section section1 = new Section(
+                    "section1"
+            );
+
+            sectionRepository.saveAll(
+                    List.of(aDefault, section1)
+            );
+
+            Advertisement add1 = new Advertisement(
+                    user1,
+                    "add1",
+                    1,
+                    "desc1",
+                    region3,
+                    city1,
+                    aDefault
+            );
+
+            Advertisement add2 = new Advertisement(
+                    user2,
+                    "add2",
+                    2,
+                    "desc2",
+                    region4,
+                    city2,
+                    section1
+            );
+
+            advertisementRepository.saveAll(
+                    List.of(add1, add2)
             );
         };
     }
