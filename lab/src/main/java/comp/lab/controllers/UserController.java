@@ -46,7 +46,7 @@ public class UserController {
     @PutMapping(path = "/role/{userId}")
     public ResponseEntity<String> updateUserRole(
             @PathVariable("userId") Long userId,
-            @RequestParam Role role) {
+            @RequestParam("role") Role role) {
         userService.updateUserRole(userId, role);
         return new ResponseEntity<>("User role updated!", HttpStatus.CREATED);
     }
