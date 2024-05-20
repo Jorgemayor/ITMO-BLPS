@@ -11,6 +11,8 @@ import lombok.ToString;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -50,6 +52,10 @@ public class User {
     private Role role;
 
     private LocalDate dob;
+
+    @OneToMany(mappedBy = "id", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ToString.Exclude
+    private Set<Advertisement> advertisements = new HashSet<>();
 
     public User() {
         role = Role.INACTIVE;
