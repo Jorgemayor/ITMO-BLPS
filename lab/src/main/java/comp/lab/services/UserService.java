@@ -42,7 +42,10 @@ public class UserService {
         if (!dob.isBefore(LocalDate.now())) {
             throw new IllegalStateException("Birthdate not acceptable.");
         }
-        user.setRole(Role.USER);
+
+        if (user.getRole() == null || user.getRole().name().equals("INACTIVE")) {
+            user.setRole(Role.USER);
+        }
         userRepository.save(user);
     }
 
