@@ -1,6 +1,7 @@
 package comp.lab.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import comp.lab.security.WebSecurityConfig;
 import jakarta.persistence.*;
 
 import jakarta.validation.constraints.NotNull;
@@ -42,7 +43,6 @@ public class User {
     @Pattern(regexp = "^[\\w-.]+@([\\w-]+\\.)+[\\w-]{2,4}$")
     private String email;
 
-    @JsonIgnore
     private String password;
 
     @Transient
@@ -64,7 +64,7 @@ public class User {
     public User(String name, String email, String password, LocalDate dob) {
         this.name = name;
         this.email = email;
-        this.password = password;
+        this.password = WebSecurityConfig.passwordEncoder().encode(password);
         this.dob = dob;
 
         this.role = Role.USER;
@@ -73,7 +73,7 @@ public class User {
     public User(String name, String email, String password, Role role, LocalDate dob) {
         this.name = name;
         this.email = email;
-        this.password = password;
+        this.password = WebSecurityConfig.passwordEncoder().encode(password);
         this.role = role;
         this.dob = dob;
     }

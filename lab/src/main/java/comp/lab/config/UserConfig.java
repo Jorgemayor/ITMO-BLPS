@@ -25,7 +25,7 @@ public class UserConfig {
             User admin = new User(
                     "admin",
                     "admin@mail.com",
-                    "$2a$12$ZrrZJzkY4KEprzymVnIiAOlntmZt0BmGFACO4MV7lNtNPTR1lpC4y",
+                    "admin",
                     Role.ADMIN,
                     LocalDate.of(2000, Month.MAY, 19)
             );
@@ -33,14 +33,14 @@ public class UserConfig {
             User user1 = new User(
                     "user1",
                     "user1@mail.com",
-                    "$2a$12$X9LVo8lu15aCeGAKzXlJBu6Wb7GAduPcI8uODla7bwGANKz2wrlqy",
+                    "user",
                     LocalDate.of(2000, Month.JANUARY, 5)
             );
 
             User user2 = new User(
                     "user2",
                     "user2@mail.com",
-                    "$2a$12$X9LVo8lu15aCeGAKzXlJBu6Wb7GAduPcI8uODla7bwGANKz2wrlqy",
+                    "user",
                     LocalDate.of(2000, Month.JUNE, 5)
             );
 

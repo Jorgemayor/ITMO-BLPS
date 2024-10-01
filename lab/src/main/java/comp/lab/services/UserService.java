@@ -1,6 +1,7 @@
 package comp.lab.services;
 
 import comp.lab.exceptions.EmailAlreadyExistsException;
+import comp.lab.exceptions.InvalidPasswordException;
 import comp.lab.exceptions.UserNotFoundException;
 import comp.lab.model.Role;
 import comp.lab.model.User;
@@ -39,13 +40,18 @@ public class UserService {
         }
 
         LocalDate dob = user.getDob();
-        if (!dob.isBefore(LocalDate.now())) {
+        if (dob == null || !dob.isBefore(LocalDate.now())) {
             throw new IllegalStateException("Birthdate not acceptable.");
         }
 
         if (user.getRole() == null || user.getRole().name().equals("INACTIVE")) {
             user.setRole(Role.USER);
         }
+
+        if (user.getPassword().isEmpty() || user.getPassword().length() < 6) {
+            throw new InvalidPasswordException("Password length not acceptable.");
+        }
+
         userRepository.save(user);
     }
 
