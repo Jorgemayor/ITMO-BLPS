@@ -1,4 +1,4 @@
-package comp.lab.model;
+package comp.lab.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -13,31 +13,36 @@ import java.util.Set;
 @Setter
 @Entity
 @NoArgsConstructor
-@Table(name = "section",
+@Table(name = "region",
         uniqueConstraints = {
                 @UniqueConstraint(columnNames = "name")
         })
-public class Section {
+public class RegionEntity {
+
     @Id
     @SequenceGenerator(
-            name = "section_sequence",
-            sequenceName = "section_sequence",
+            name = "region_sequence",
+            sequenceName = "region_sequence",
             allocationSize = 1
     )
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
-            generator = "section_sequence"
+            generator = "region_sequence"
     )
     private Long id;
 
     @NotBlank
     private String name;
 
-    @OneToMany(mappedBy = "section", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "region", cascade = CascadeType.ALL)
     @JsonIgnore
-    private Set<Advertisement> advertisements;
+    private Set<CityEntity> cities;
 
-    public Section(String name) {
+    @OneToMany(mappedBy = "region", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private Set<AdvertisementEntity> advertisementEntities;
+
+    public RegionEntity(String name) {
         this.name = name;
     }
 }

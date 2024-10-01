@@ -1,6 +1,6 @@
 package comp.lab.services;
 
-import comp.lab.model.City;
+import comp.lab.entity.CityEntity;
 import comp.lab.repositories.CityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,7 +17,7 @@ public class CityService {
         this.cityRepository = cityRepository;
     }
 
-    public Optional<City> findCityByName(String name) {
+    public Optional<CityEntity> findCityByName(String name) {
         return cityRepository.findByName(name);
     }
 }

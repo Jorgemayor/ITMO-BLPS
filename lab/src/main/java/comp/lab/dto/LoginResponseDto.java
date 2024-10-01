@@ -1,10 +1,10 @@
-package comp.lab.model;
+package comp.lab.dto;
 
 import lombok.Builder;
 import lombok.Getter;
 
 @Getter
 @Builder
-public class LoginResponse {
+public class LoginResponseDto {
     private final String accessToken;
 }

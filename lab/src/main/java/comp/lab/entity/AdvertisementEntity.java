@@ -1,4 +1,4 @@
-package comp.lab.model;
+package comp.lab.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -14,7 +14,7 @@ import lombok.ToString;
 @Entity
 @NoArgsConstructor
 @Table(name = "advertisement")
-public class Advertisement {
+public class AdvertisementEntity {
     @Id
     @SequenceGenerator(
             name = "advertisement_sequence",
@@ -30,7 +30,7 @@ public class Advertisement {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     @JsonIgnore
-    private User user;
+    private UserEntity user;
 
     private String name;
 
@@ -46,23 +46,23 @@ public class Advertisement {
     @NotNull
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "region_id", referencedColumnName = "id")
-    private Region region;
+    private RegionEntity region;
 
     @NotNull
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "city_id", referencedColumnName = "id")
-    private City city;
+    private CityEntity city;
 
     private byte[] image;
 
     @NotNull
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "section_id", referencedColumnName = "id")
-    private Section section;
+    private SectionEntity section;
 
-    public Advertisement(User user, String name, Integer price, String description, Region region, City city, Section section) {
+    public AdvertisementEntity(UserEntity userEntity, String name, Integer price, String description, RegionEntity region, CityEntity city, SectionEntity section) {
         this.status = Status.REVISION;
-        this.user = user;
+        this.user = userEntity;
         this.name = name;
         this.price = price;
         this.description = description;

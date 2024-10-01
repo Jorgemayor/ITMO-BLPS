@@ -1,7 +1,7 @@
 package comp.lab.services;
 
 import comp.lab.exceptions.UserNotFoundException;
-import comp.lab.model.*;
+import comp.lab.entity.*;
 import comp.lab.repositories.AdvertisementRepository;
 import comp.lab.security.UserPrincipal;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class AdvertisementService {
@@ -35,21 +34,21 @@ public class AdvertisementService {
         this.cityService = cityService;
     }
 
-    public List<Advertisement> getAdvertisements() {
+    public List<AdvertisementEntity> getAdvertisements() {
         return advertisementRepository.findAll();
     }
 
-    public Advertisement findAdvertisementById(Long advertisementId) {
+    public AdvertisementEntity findAdvertisementById(Long advertisementId) {
         return advertisementRepository.findById(advertisementId).orElseThrow(
                 () -> new IllegalArgumentException("add with id " + advertisementId + " does not exists.")
         );
     }
 
-    public List<Advertisement> findAdvertisementsByRegionName(String regionName) {
+    public List<AdvertisementEntity> findAdvertisementsByRegionName(String regionName) {
         return advertisementRepository.findAdvertisementsByRegionName(regionName);
     }
 
-    public List<Advertisement> findAdvertisementsBySectionName(String sectionName) {
+    public List<AdvertisementEntity> findAdvertisementsBySectionName(String sectionName) {
         return advertisementRepository.findAdvertisementsBySectionName(sectionName);
     }
 
@@ -64,34 +63,34 @@ public class AdvertisementService {
             String sectionName
     ) {
         String userEmail = principal.getEmail();
-        User user = userService.findUserByEmail(userEmail).orElseThrow(
+        UserEntity userEntity = userService.findUserByEmail(userEmail).orElseThrow(
                 () -> new UserNotFoundException("user with email " + userEmail + " does not exists.")
         );
 
-        Region region = regionService.findRegionByName(regionName).orElseThrow(
+        RegionEntity regionEntity = regionService.findRegionByName(regionName).orElseThrow(
                 () -> new IllegalArgumentException("region with name " + regionName + " does not exists.")
         );
 
-        City city = cityService.findCityByName(cityName).orElseThrow(
+        CityEntity cityEntity = cityService.findCityByName(cityName).orElseThrow(
                 () -> new IllegalArgumentException("city with name " + cityName + " does not exists.")
         );
 
-        Section section = sectionService.findSectionByName(sectionName).orElseThrow(
+        SectionEntity sectionEntity = sectionService.findSectionByName(sectionName).orElseThrow(
                 () -> new IllegalArgumentException("section with name " + sectionName + " does not exists.")
         );
 
-        Advertisement advertisement = new Advertisement(
-                user,
+        AdvertisementEntity advertisementEntity = new AdvertisementEntity(
+                userEntity,
                 name,
                 price,
                 description,
-                region,
-                city,
-                section
+                regionEntity,
+                cityEntity,
+                sectionEntity
         );
 
-        user.getAdvertisements().add(advertisement);
-        advertisement.setUser(user);
-        userService.addUser(user);
+        userEntity.getAdvertisementEntities().add(advertisementEntity);
+        advertisementEntity.setUser(userEntity);
+        userService.addUser(userEntity);
     }
 }

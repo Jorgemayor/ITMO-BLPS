@@ -1,4 +1,4 @@
-package comp.lab.model;
+package comp.lab.entity;
 
 public enum Status {
     REVISION,

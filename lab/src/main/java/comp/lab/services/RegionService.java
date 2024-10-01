@@ -1,6 +1,6 @@
 package comp.lab.services;
 
-import comp.lab.model.Region;
+import comp.lab.entity.RegionEntity;
 import comp.lab.repositories.RegionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,7 +17,7 @@ public class RegionService {
         this.regionRepository = regionRepository;
     }
 
-    public Optional<Region> findRegionByName(String name) {
+    public Optional<RegionEntity> findRegionByName(String name) {
         return regionRepository.findByName(name);
     }
 }

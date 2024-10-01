@@ -1,48 +1,43 @@
-package comp.lab.model;
+package comp.lab.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Set;
 
-@Entity
 @Getter
 @Setter
+@Entity
 @NoArgsConstructor
-@Table(name = "city",
+@Table(name = "section",
         uniqueConstraints = {
                 @UniqueConstraint(columnNames = "name")
         })
-public class City {
-
+public class SectionEntity {
     @Id
     @SequenceGenerator(
-            name = "city_sequence",
-            sequenceName = "city_sequence",
+            name = "section_sequence",
+            sequenceName = "section_sequence",
             allocationSize = 1
     )
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
-            generator = "city_sequence"
+            generator = "section_sequence"
     )
     private Long id;
 
+    @NotBlank
     private String name;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "region_id", referencedColumnName = "id")
+    @OneToMany(mappedBy = "section", cascade = CascadeType.ALL)
     @JsonIgnore
-    private Region region;
+    private Set<AdvertisementEntity> advertisementEntities;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JsonIgnore
-    private Set<Advertisement> advertisements;
-
-    public City(String name, Region region) {
+    public SectionEntity(String name) {
         this.name = name;
-        this.region = region;
     }
 }

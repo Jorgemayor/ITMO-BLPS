@@ -1,11 +1,11 @@
-package comp.lab.model;
+package comp.lab.dto;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class LoginRequest {
+public class LoginRequestDto {
     private String email;
     private String password;
 }

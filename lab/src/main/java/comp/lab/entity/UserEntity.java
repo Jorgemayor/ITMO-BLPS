@@ -1,6 +1,5 @@
-package comp.lab.model;
+package comp.lab.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import comp.lab.security.WebSecurityConfig;
 import jakarta.persistence.*;
 
@@ -25,7 +24,7 @@ import java.util.Set;
         @UniqueConstraint(columnNames = "email")
     }
 )
-public class User {
+public class UserEntity {
     @Id
     @SequenceGenerator(
             name = "users_sequence",
@@ -55,13 +54,13 @@ public class User {
 
     @OneToMany(mappedBy = "id", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @ToString.Exclude
-    private Set<Advertisement> advertisements = new HashSet<>();
+    private Set<AdvertisementEntity> advertisementEntities = new HashSet<>();
 
-    public User() {
+    public UserEntity() {
         role = Role.INACTIVE;
     }
 
-    public User(String name, String email, String password, LocalDate dob) {
+    public UserEntity(String name, String email, String password, LocalDate dob) {
         this.name = name;
         this.email = email;
         this.password = WebSecurityConfig.passwordEncoder().encode(password);
@@ -70,7 +69,7 @@ public class User {
         this.role = Role.USER;
     }
 
-    public User(String name, String email, String password, Role role, LocalDate dob) {
+    public UserEntity(String name, String email, String password, Role role, LocalDate dob) {
         this.name = name;
         this.email = email;
         this.password = WebSecurityConfig.passwordEncoder().encode(password);

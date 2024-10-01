@@ -1,7 +1,7 @@
 package comp.lab.controllers;
 
-import comp.lab.model.Role;
-import comp.lab.model.User;
+import comp.lab.entity.Role;
+import comp.lab.entity.UserEntity;
 import comp.lab.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,13 +22,13 @@ public class UserController {
     }
 
     @GetMapping
-    public ResponseEntity<List<User>> getUsers() {
+    public ResponseEntity<List<UserEntity>> getUsers() {
         return ResponseEntity.ok(userService.getUsers());
     }
 
     @PostMapping
-    public ResponseEntity<String> registerUser(@RequestBody User user) {
-        userService.addUser(user);
+    public ResponseEntity<String> registerUser(@RequestBody UserEntity userEntity) {
+        userService.addUser(userEntity);
         return new ResponseEntity<>("User created successfully!", HttpStatus.CREATED);
     }
 

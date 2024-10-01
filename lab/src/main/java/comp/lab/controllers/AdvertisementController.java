@@ -1,6 +1,6 @@
 package comp.lab.controllers;
 
-import comp.lab.model.*;
+import comp.lab.entity.*;
 import comp.lab.security.UserPrincipal;
 import comp.lab.services.AdvertisementService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,22 +22,22 @@ public class AdvertisementController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Advertisement>> getAdvertisements() {
+    public ResponseEntity<List<AdvertisementEntity>> getAdvertisements() {
         return ResponseEntity.ok(advertisementService.getAdvertisements());
     }
 
     @GetMapping(path = "/region/{regionName}")
-    public ResponseEntity<List<Advertisement>> findAdvertisementsByRegionName(@PathVariable("regionName") String regionName) {
+    public ResponseEntity<List<AdvertisementEntity>> findAdvertisementsByRegionName(@PathVariable("regionName") String regionName) {
         return ResponseEntity.ok(advertisementService.findAdvertisementsByRegionName(regionName));
     }
 
     @GetMapping(path = "/section/{sectionName}")
-    public ResponseEntity<List<Advertisement>> findAdvertisementsBySectionName(@PathVariable("sectionName") String sectionName) {
+    public ResponseEntity<List<AdvertisementEntity>> findAdvertisementsBySectionName(@PathVariable("sectionName") String sectionName) {
         return ResponseEntity.ok(advertisementService.findAdvertisementsBySectionName(sectionName));
     }
 
     @GetMapping(path = "/{idAdvertisement}")
-    public ResponseEntity<Advertisement> findAdvertisementsById(@PathVariable("idAdvertisement") Long idAdvertisement) {
+    public ResponseEntity<AdvertisementEntity> findAdvertisementsById(@PathVariable("idAdvertisement") Long idAdvertisement) {
         return ResponseEntity.ok(advertisementService.findAdvertisementById(idAdvertisement));
     }
 

@@ -1,7 +1,7 @@
 package comp.lab.controllers;
 
-import comp.lab.model.LoginRequest;
-import comp.lab.model.LoginResponse;
+import comp.lab.dto.LoginRequestDto;
+import comp.lab.dto.LoginResponseDto;
 import comp.lab.services.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
@@ -18,7 +18,7 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping("/login")
-    public LoginResponse login(@RequestBody @Validated LoginRequest request) {
+    public LoginResponseDto login(@RequestBody @Validated LoginRequestDto request) {
         return authService.attemptLogin(request.getEmail(), request.getPassword());
     }
 }

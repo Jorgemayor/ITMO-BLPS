@@ -1,6 +1,6 @@
 package comp.lab.services;
 
-import comp.lab.model.Section;
+import comp.lab.entity.SectionEntity;
 import comp.lab.repositories.SectionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,7 +17,7 @@ public class SectionService {
         this.sectionRepository = sectionRepository;
     }
 
-    public Optional<Section> findSectionByName(String name) {
+    public Optional<SectionEntity> findSectionByName(String name) {
         return sectionRepository.findByName(name);
     }
 }

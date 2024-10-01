@@ -1,6 +1,6 @@
 package comp.lab.services;
 
-import comp.lab.model.LoginResponse;
+import comp.lab.dto.LoginResponseDto;
 import comp.lab.security.JwtIssuer;
 import comp.lab.security.UserPrincipal;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +17,7 @@ public class AuthService {
     private final JwtIssuer jwtIssuer;
     private final AuthenticationManager authenticationManager;
 
-    public LoginResponse attemptLogin(String email, String password) {
+    public LoginResponseDto attemptLogin(String email, String password) {
         var authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(email, password)
         );
@@ -29,7 +29,7 @@ public class AuthService {
                 .toList();
 
         var token = jwtIssuer.issue(principal.getUserId(), principal.getEmail(), roles);
-        return LoginResponse.builder()
+        return LoginResponseDto.builder()
                 .accessToken(token)
                 .build();
     }

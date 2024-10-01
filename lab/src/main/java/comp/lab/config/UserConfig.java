@@ -1,6 +1,6 @@
 package comp.lab.config;
 
-import comp.lab.model.*;
+import comp.lab.entity.*;
 import comp.lab.repositories.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
@@ -22,7 +22,7 @@ public class UserConfig {
             AdvertisementRepository advertisementRepository
     ) {
         return args -> {
-            User admin = new User(
+            UserEntity admin = new UserEntity(
                     "admin",
                     "admin@mail.com",
                     "admin",
@@ -30,14 +30,14 @@ public class UserConfig {
                     LocalDate.of(2000, Month.MAY, 19)
             );
 
-            User user1 = new User(
+            UserEntity user1 = new UserEntity(
                     "user1",
                     "user1@mail.com",
                     "user",
                     LocalDate.of(2000, Month.JANUARY, 5)
             );
 
-            User user2 = new User(
+            UserEntity user2 = new UserEntity(
                     "user2",
                     "user2@mail.com",
                     "user",
@@ -48,11 +48,11 @@ public class UserConfig {
                     List.of(admin, user1, user2)
             );
 
-            Region region3 = new Region(
+            RegionEntity region3 = new RegionEntity(
                     "region3"
             );
 
-            Region region4 = new Region(
+            RegionEntity region4 = new RegionEntity(
                     "region4"
             );
 
@@ -60,12 +60,12 @@ public class UserConfig {
                     List.of(region3, region4)
             );
 
-            City city1 = new City(
+            CityEntity city1 = new CityEntity(
                     "city1",
                     region3
             );
 
-            City city2 = new City(
+            CityEntity city2 = new CityEntity(
                     "city2",
                     region4
             );
@@ -74,11 +74,11 @@ public class UserConfig {
                     List.of(city1, city2)
             );
 
-            Section aDefault = new Section(
+            SectionEntity aDefault = new SectionEntity(
                     "default"
             );
 
-            Section section1 = new Section(
+            SectionEntity section1 = new SectionEntity(
                     "section1"
             );
 
@@ -86,7 +86,7 @@ public class UserConfig {
                     List.of(aDefault, section1)
             );
 
-            Advertisement add1 = new Advertisement(
+            AdvertisementEntity add1 = new AdvertisementEntity(
                     user1,
                     "add1",
                     1,
@@ -96,7 +96,7 @@ public class UserConfig {
                     aDefault
             );
 
-            Advertisement add2 = new Advertisement(
+            AdvertisementEntity add2 = new AdvertisementEntity(
                     user2,
                     "add2",
                     2,
