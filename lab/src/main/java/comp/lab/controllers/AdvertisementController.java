@@ -1,5 +1,6 @@
 package comp.lab.controllers;
 
+import comp.lab.dto.AdvertisementDto;
 import comp.lab.entity.*;
 import comp.lab.security.UserPrincipal;
 import comp.lab.services.AdvertisementService;
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -44,21 +46,11 @@ public class AdvertisementController {
     @PostMapping
     public ResponseEntity<String> addAdvertisement(
             @AuthenticationPrincipal UserPrincipal principal,
-            @RequestParam String name,
-            @RequestParam Integer price,
-            @RequestParam String description,
-            @RequestParam String regionName,
-            @RequestParam String cityName,
-            @RequestParam String sectionName
+            @RequestBody @Validated AdvertisementDto advertisementDto
             ) {
         advertisementService.addNewAdvertisementWithEmail(
-                principal,
-                name,
-                price,
-                description,
-                regionName,
-                cityName,
-                sectionName
+                principal.getEmail(),
+                advertisementDto
         );
         return new ResponseEntity<>("Add created successfully!", HttpStatus.CREATED);
     }

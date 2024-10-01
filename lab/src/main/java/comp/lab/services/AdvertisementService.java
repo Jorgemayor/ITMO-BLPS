@@ -1,5 +1,6 @@
 package comp.lab.services;
 
+import comp.lab.dto.AdvertisementDto;
 import comp.lab.exceptions.UserNotFoundException;
 import comp.lab.entity.*;
 import comp.lab.repositories.AdvertisementRepository;
@@ -54,31 +55,31 @@ public class AdvertisementService {
 
     @Transactional
     public void addNewAdvertisementWithEmail(
-            UserPrincipal principal,
-            String name,
-            Integer price,
-            String description,
-            String regionName,
-            String cityName,
-            String sectionName
+            String userEmail,
+            AdvertisementDto advertisementDto
     ) {
-        String userEmail = principal.getEmail();
         UserEntity userEntity = userService.findUserByEmail(userEmail).orElseThrow(
                 () -> new UserNotFoundException("user with email " + userEmail + " does not exists.")
         );
 
+        String regionName  = advertisementDto.getRegionName();
         RegionEntity regionEntity = regionService.findRegionByName(regionName).orElseThrow(
                 () -> new IllegalArgumentException("region with name " + regionName + " does not exists.")
         );
 
+        String cityName = advertisementDto.getCityName();
         CityEntity cityEntity = cityService.findCityByName(cityName).orElseThrow(
                 () -> new IllegalArgumentException("city with name " + cityName + " does not exists.")
         );
 
+        String sectionName = advertisementDto.getSectionName();
         SectionEntity sectionEntity = sectionService.findSectionByName(sectionName).orElseThrow(
                 () -> new IllegalArgumentException("section with name " + sectionName + " does not exists.")
         );
 
+        String name = advertisementDto.getName();
+        Integer price = advertisementDto.getPrice();
+        String description = advertisementDto.getDescription();
         AdvertisementEntity advertisementEntity = new AdvertisementEntity(
                 userEntity,
                 name,
